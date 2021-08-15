@@ -1,68 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "components/Header";
-import AddContact from "components/AddContact";
-import ContactCard from "components/ContactCard";
-
-import { useSelector } from "react-redux";
-import AppConfig from "App.config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Autocomplete from "components/AutoComplete";
+import CountriesList from "resources/data/countries-list.json";
+import "./index.css";
 import ExternalInfo from "components/ExternalInfo";
 
-/**
- * Redux CURD Operations
- *
- * 1. Read data from redux store
- * 2. Create data in store
- * 3. Update a data in store
- * 4. Delete the data from store
- */
-
-const ContactList = () => {
-    const contacts = useSelector(state => state.contacts.list);
-
-    const [contactFormVisiblity, setContactFormVisiblity] = useState(false);
-
-    const toggleContactFormVisiblity = () =>
-        setContactFormVisiblity(visiblity => !visiblity);
-
+const AutocompletePage = () => {
+    const [country, setcountry] = useState("");
     return (
         <>
-            <Header title="Redux CRUD Operations (Create, Read, Update and Delete)" />
+            <Header title="Building An Auto complete Comonent" />
 
-            <ExternalInfo page="contactListCRUD" />
+            <ExternalInfo page="autocomplete" />
 
             <div className="row">
                 <div className="col text-center">
-                    <h2>Manage contacts!!!</h2>
-                    <p>
-                        This demo performs CRUD operation in redux store. You
-                        can add, edit and delete a contact in the below demo
-                    </p>
+                    <h2>Search Country!!!</h2>
+                    <p>You can search a country by it's name</p>
+                    <div className="d-flex justify-content-center mb-3">
+                        <div className="search-bar-container">
+                            <Autocomplete
+                                data={CountriesList}
+                                onSelect={country => setcountry(country)}
+                            />
 
-                    <div className="col-sm-6 offset-sm-3">
-                        <div className="card">
-                            <div className="card-header bg-dark text-white text-left">
-                                <h4 className="d-inline">Contact List</h4>
-                                <span
-                                    className="float-right mt-1 cursor-pointer"
-                                    onClick={toggleContactFormVisiblity}
-                                >
-                                    <i className="fas fa-plus"></i>
-                                </span>
-                            </div>
-
-                            <ul className="list-group list-group-flush">
-                                {contacts.map((contact, index) => (
-                                    <ContactCard
-                                        {...contact}
-                                        index={index}
-                                        key={contact.name}
-                                    />
-                                ))}
-                            </ul>
+                            <FontAwesomeIcon
+                                icon="search"
+                                className="search-bar-icon"
+                            />
                         </div>
                     </div>
-                    {contactFormVisiblity && (
-                        <AddContact onClose={toggleContactFormVisiblity} />
+
+                    {country && (
+                        <pre className="text-left">
+                            {JSON.stringify(country, 0, 2)}
+                        </pre>
                     )}
                 </div>
             </div>
@@ -70,4 +43,4 @@ const ContactList = () => {
     );
 };
 
-export default ContactList;
+export default AutocompletePage;

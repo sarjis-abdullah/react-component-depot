@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Navbar } from "./Navbar";
 import { useSelector } from "react-redux";
-import YoutubePlayer from "components/YoutubePlayer";
 
 import ReactGA from "react-ga";
 import { withRouter } from "react-router-dom";
@@ -19,7 +18,7 @@ const Home = ({ children }) => {
     return (
         <>
             <div className="wrapper">
-                <Navbar />
+                
 
                 <div id="content" className={!isNavbarVisible ? "active" : ""}>
                     {process.env.NODE_ENV === "production" && <div className="user-notification">
@@ -35,7 +34,6 @@ const Home = ({ children }) => {
 
                     {children}
                 </div>
-                <YoutubePlayer />
             </div>
 
             <a

@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import "components/FontawsomeIcons";
+// import "components/FontawsomeIcons";
 
 import "./App.css";
 import "./dark.css";
@@ -7,8 +7,7 @@ import "./dark.css";
 import Layout from "pages/_layouts/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import routes from "routes";
-import PageNotFound from "pages/PageNotFound";
-import Home from "pages/Home";
+import ContactList from "pages/ContactList";
 
 function App() {
     return (
@@ -25,11 +24,9 @@ function App() {
                         ))}
 
                         <Route path="/" exact>
-                            {/* <Home /> */}
+                            <ContactList/>
                         </Route>
-                        <Route>
-                            <PageNotFound />
-                        </Route>
+                        
                     </Switch>
                 </Suspense>
             </Layout>
