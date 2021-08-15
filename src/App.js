@@ -25,7 +25,7 @@ function App() {
                         ))}
 
                         <Route path="/" exact>
-                            <Home />
+                            {/* <Home /> */}
                         </Route>
                         <Route>
                             <PageNotFound />
